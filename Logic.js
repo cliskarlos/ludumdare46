@@ -95,7 +95,7 @@ class Logic {
 
         if(actor.__scriptListData != undefined) { 
 
-            console.log(actor.scriptList, actor.__scriptListData);
+            //console.log(actor.scriptList, actor.__scriptListData);
 
             actor.scriptList        = actor.__scriptListData;
             actor.__scriptListData  = [];
@@ -555,7 +555,7 @@ class Logic {
         /** Definimos la expresion */
         var expression = "engine.removeSceneHandler()" + "\n";
 
-        console.log(actor, parameters, expression);
+        //console.log(actor, parameters, expression);
 
         /* Creamos el nuevo nodo con su expresion correspondiente. */
         return new Do(expression, actor.scope);

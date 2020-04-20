@@ -1,64 +1,140 @@
 <!DOCTYPE HTML>
-<html lang="en-US">
-<head>
-	<meta charset="UTF-8">
-	<meta name="theme-color" content="#000000">
-	<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-	<title>Run for their lives - @cliskarlos</title>
+
+<html>
 	
-</head>
+	<head>
 
-<body>
-
-	<script>
-
-		function onFileLoaded(data) {
-
-			var gameData={};
-			Object.assign(gameData, data);
-			gameData=JSON.stringify(gameData, (key,value)=>{if(key!="id")return value}, '\t');
-			localStorage.setItem("localStorage_GameData",gameData);
-			var form = document.createElement("form");
-			form.setAttribute("method", "post");
-			form.setAttribute("action", "../engine/index.php");
-			form.setAttribute("target", "_self");
-			var inputFolder = document.createElement('input');
-			inputFolder.type = 'text';
-			inputFolder.name = "gameFolder";
-			inputFolder.value = gameFolder;
-			form.appendChild(inputFolder);
+		<style type="text/css">
 			
-			var inputUrl = document.createElement('input');
-			inputUrl.type = 'text';
-			inputUrl.name = "parentGamesFolder";
-			inputUrl.value = parentGamesFolder;
-			form.appendChild(inputUrl);
-			document.body.appendChild(form);
-			form.submit();
-			document.body.removeChild(form); 
-		}
-
-		function load(URL) {		
-
-			var xhr = new XMLHttpRequest();
-			xhr.onreadystatechange = function() {
-				if(this.readyState == this.DONE && this.status == 200){
-					var json=JSON.parse(this.responseText);    		   
-					onFileLoaded(json);
-				}
+			* {
+				margin:0;
+				padding:0;
 			}
-			xhr.open("GET", URL, true);
-			xhr.send();
-		}
 
-		var gameFolder = "ludumdare46-carlos";
-		var host = "."; 
-		var parentGamesFolder = host+"/games";		
+			html, body {
+				width:100%;
+				height:100%;
+				background: #333333;
+			}
+ 
+			canvas {
+				display:block; 
+                position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translateX(-50%) translateY(-50%);
+			}
 
-		//load(this.parentGamesFolder+"/loadJson.php?gameFolder="+this.gameFolder);
-		load("/games/ludumdare46-carlos/game.json");
-
-    </script>
+		</style>
 	
-</body>
+		<title>Run for their lives - @cliskarlos</title>
+	
+	</head>
+	
+	<body>
+
+		<script src="libraries/math.js"></script>
+		<script src="libraries/pixi.min.js"></script>
+		<script src="libraries/box2d.min.js"></script>
+		<script src="libraries/howler.min.js"></script>
+
+        <script src="Player.js"></script>
+
+        <script src="File.js"></script>
+		<script src="Engine.js"></script>
+
+		<script src="Game.js"></script>
+		
+        <script src="Util.js"></script>
+
+        <script src="Physics.js"></script>
+        <script src="Input.js"></script>
+        <script src="Logic.js"></script>
+        <script src="Audio.js"></script>
+        <script src="Render.js"></script>
+
+		<script src="Actor.js"></script>
+		
+		<script src="If.js"></script>
+		<script src="Do.js"></script>
+
+		<script>
+
+			var _player;
+
+			function onFileLoaded(data) {
+
+				var gameData={};
+				Object.assign(gameData, data);
+				gameData=JSON.stringify(gameData, (key,value)=>{if(key!="id")return value}, '\t');
+				localStorage.setItem("localStorage_GameData",gameData);
+
+				_player = new Player({source: "", data: localStorage.getItem("localStorage_GameData")});
+
+
+				/*
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("action", "./engine/index.html");
+				form.setAttribute("target", "_self");
+				var inputFolder = document.createElement('input');
+				inputFolder.type = 'text';
+				inputFolder.name = "gameFolder";
+				inputFolder.value = gameFolder;
+				form.appendChild(inputFolder);
+				
+				var inputUrl = document.createElement('input');
+				inputUrl.type = 'text';
+				inputUrl.name = "parentGamesFolder";
+				inputUrl.value = parentGamesFolder;
+				form.appendChild(inputUrl);
+				document.body.appendChild(form);
+				form.submit();
+				document.body.removeChild(form); */
+			}
+
+			function load(URL) {		
+
+				fetch(URL).then(function(response) { return response.json(); }).then(function(myJson) {
+					//console.log(myJson);
+					onFileLoaded(myJson);
+				});
+			/*
+			fetch('http://example.com/movies.json')
+			.then(function(response) {
+			return response.json();
+			})
+			.then(function(myJson) {
+			console.log(myJson);
+			});*/
+
+
+				/*.then(function(myJson) {
+					console.log(myJson);
+				});*/
+
+				/*var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function() {
+					if(this.readyState == this.DONE && this.status == 200){
+						var json=JSON.parse(this.responseText);    		   
+						onFileLoaded(json);
+					}
+				}
+				xhr.open("GET", URL, true);
+				xhr.send();*/
+			}
+
+			load("./games/game.json");
+
+
+
+
+
+		
+			//var _player = new Player({source: "", data: localStorage.getItem("localStorage_GameData")});
+
+		</script>
+
+	</body>
+
 </html>

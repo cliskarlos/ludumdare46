@@ -39,7 +39,7 @@ class Audio {
     createSound(sound, destroy) {
 
         return new Howl({
-            src: [_player.file.source + "/sounds/" + sound.source],
+            src: ["./games/sounds/" + sound.source],
             autoplay: sound.play,
             loop: sound.loop || false,
             volume: sound.volume,

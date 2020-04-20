@@ -282,12 +282,12 @@ class Physics {
 
     sleepRigidbodies() {
 
-        console.log(this.rigidbodyList);
+        //console.log(this.rigidbodyList);
 
         for(var i = 0; i < this.rigidbodyList.length; i++) {
 
 
-            console.log("entra");
+            //console.log("entra");
 
             this.rigidbodyList[i].rigidbody.m_body.SetActive(false);
         }

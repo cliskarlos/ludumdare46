@@ -124,12 +124,12 @@ class Engine {
         this.game.activeSceneNumber = this.game.sceneList[this.game.activeScene].number;
         this.enableScene();
 
-        for(var i in this.actorList) {
+        /*for(var i in this.actorList) {
 
             
 
             console.log(this.actorList[i].scriptList)
-        }
+        }*/
     }
 
     updateScenes() {
