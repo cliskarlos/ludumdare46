@@ -50,12 +50,13 @@
 			xhr.open("GET", URL, true);
 			xhr.send();
 		}
-		
+
 		var gameFolder = "ludumdare46-carlos";
-		var host = window.location.href.replace("launcher/", "");
+		var host = "."; 
 		var parentGamesFolder = host+"/games";		
 
-		load(this.parentGamesFolder+"/loadJson.php?gameFolder="+this.gameFolder);
+		//load(this.parentGamesFolder+"/loadJson.php?gameFolder="+this.gameFolder);
+		load("/games/ludumdare46-carlos/game.json");
 
     </script>
 	
